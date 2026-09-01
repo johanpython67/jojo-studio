@@ -425,3 +425,134 @@ footer .copyright {
         padding: 90px 5%;
     }
 }
+/* SUBJECT PAGE */
+
+.subject-hero {
+    padding: 150px 7% 100px;
+
+    max-width: 1100px;
+
+    margin: auto;
+}
+
+.subject-hero h1 {
+    font-size: clamp(60px, 10vw, 120px);
+
+    line-height: 0.9;
+
+    letter-spacing: -5px;
+
+    margin: 20px 0;
+}
+
+.subject-hero > p:last-child {
+    max-width: 600px;
+
+    color: #888;
+
+    font-size: 18px;
+}
+
+
+/* CHAPTERS */
+
+.chapters {
+    padding: 100px 7%;
+
+    max-width: 1100px;
+
+    margin: auto;
+}
+
+.chapter-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.chapter-card {
+    display: grid;
+
+    grid-template-columns: 60px 1fr 40px;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 28px;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+
+    background: #111112;
+
+    color: white;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+.chapter-card:hover {
+    transform: translateX(6px);
+
+    border-color: #555;
+}
+
+.chapter-card > span {
+    color: #555;
+
+    font-size: 13px;
+}
+
+.chapter-card h3 {
+    font-size: 22px;
+
+    margin-bottom: 5px;
+}
+
+.chapter-card p {
+    color: #777;
+
+    font-size: 14px;
+}
+
+.chapter-card strong {
+    color: #777;
+
+    font-size: 22px;
+
+    text-align: right;
+}
+
+
+@media (max-width: 700px) {
+
+    .subject-hero {
+        padding: 100px 5% 70px;
+    }
+
+    .subject-hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .chapters {
+        padding: 70px 5%;
+    }
+
+    .chapter-card {
+        grid-template-columns: 35px 1fr 25px;
+
+        padding: 22px 18px;
+
+        gap: 12px;
+    }
+
+    .chapter-card h3 {
+        font-size: 18px;
+    }
+
+    }
