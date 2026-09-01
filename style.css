@@ -556,3 +556,279 @@ footer .copyright {
     }
 
     }
+/* CONCEPT PAGE */
+
+.concept-intro {
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 150px 7% 100px;
+}
+
+.concept-intro h1 {
+    font-size: clamp(65px, 11vw, 130px);
+
+    line-height: 0.85;
+
+    letter-spacing: -6px;
+
+    margin: 25px 0;
+}
+
+.concept-intro h1 span {
+    color: #666;
+}
+
+.concept-intro > p:last-child {
+    color: #888;
+
+    font-size: 18px;
+
+    max-width: 550px;
+}
+
+
+/* SIMULATION */
+
+.simulation-section {
+    background: #111112;
+
+    padding: 100px 7%;
+}
+
+.simulation-header {
+    max-width: 1100px;
+
+    margin: 0 auto 50px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 40px;
+}
+
+.simulation-header h2 {
+    font-size: clamp(40px, 6vw, 65px);
+
+    letter-spacing: -3px;
+
+    line-height: 1;
+    
+    margin-top: 15px;
+}
+
+.simulation-header > p {
+    max-width: 350px;
+
+    color: #777;
+}
+
+
+/* SIMULATION BOX */
+
+.simulation-container {
+    max-width: 1100px;
+
+    margin: auto;
+
+    border: 1px solid #292929;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    background: #090909;
+}
+
+#fieldCanvas {
+    display: block;
+
+    width: 100%;
+
+    height: 500px;
+
+    cursor: grab;
+}
+
+#fieldCanvas:active {
+    cursor: grabbing;
+}
+
+
+/* CONTROLS */
+
+.simulation-controls {
+    padding: 25px;
+
+    border-top: 1px solid #292929;
+}
+
+.simulation-controls label {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+    color: #aaa;
+}
+
+.simulation-controls strong {
+    color: white;
+}
+
+.simulation-controls input {
+    width: 100%;
+}
+
+.control-info {
+    margin-top: 12px;
+
+    font-size: 12px;
+
+    color: #555;
+}
+
+
+/* LESSON */
+
+.lesson-section {
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 140px 7%;
+}
+
+.lesson-section h2 {
+    font-size: clamp(40px, 6vw, 70px);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    margin: 20px 0 45px;
+}
+
+.lesson-content p {
+    color: #999;
+
+    font-size: 18px;
+
+    margin-bottom: 25px;
+}
+
+
+/* FORMULA */
+
+.formula {
+    margin-top: 50px;
+
+    padding: 35px;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+
+    font-size: 40px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+}
+
+.formula small {
+    display: block;
+
+    text-align: center;
+
+    font-size: 20px;
+
+    border-top: 1px solid #aaa;
+}
+
+
+/* KEY POINTS */
+
+.key-points {
+    max-width: 1100px;
+
+    margin: auto;
+
+    padding: 50px 7% 140px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.key-point {
+    padding: 30px;
+
+    border: 1px solid #292929;
+
+    border-radius: 12px;
+}
+
+.key-point span {
+    color: #555;
+
+    font-size: 13px;
+}
+
+.key-point h3 {
+    margin: 20px 0 10px;
+
+    font-size: 22px;
+}
+
+.key-point p {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .concept-intro {
+        padding: 100px 5% 70px;
+    }
+
+    .concept-intro h1 {
+        letter-spacing: -4px;
+    }
+
+    .simulation-section {
+        padding: 70px 5%;
+    }
+
+    .simulation-header {
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    #fieldCanvas {
+        height: 400px;
+    }
+
+    .lesson-section {
+        padding: 90px 5%;
+    }
+
+    .key-points {
+        grid-template-columns: 1fr;
+
+        padding: 30px 5% 90px;
+    }
+
+    }
