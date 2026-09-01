@@ -620,9 +620,11 @@ footer .copyright {
 }
 
 .simulation-header > p {
-    max-width: 350px;
+    max-width: 400px;
 
-    color: #777;
+    color: #b0b0b0;
+
+    line-height: 1.7;
 }
 
 
@@ -713,11 +715,15 @@ footer .copyright {
 }
 
 .lesson-content p {
-    color: #999;
+    color: #d2d2d2;
 
     font-size: 18px;
 
-    margin-bottom: 25px;
+    line-height: 1.8;
+
+    margin-bottom: 28px;
+
+    max-width: 750px;
 }
 
 
@@ -789,9 +795,11 @@ footer .copyright {
 }
 
 .key-point p {
-    color: #777;
+    color: #b5b5b5;
 
-    font-size: 14px;
+    font-size: 15px;
+
+    line-height: 1.7;
 }
 
 
