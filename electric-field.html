@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Electric Field — ISC 12</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+            ISC<span>12</span>
+        </a>
+
+        <nav>
+
+            <a href="index.html">Home</a>
+            <a href="physics.html">Physics</a>
+            <a href="#">Login</a>
+
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <!-- CONCEPT INTRO -->
+
+        <section class="concept-intro">
+
+            <p class="eyebrow">
+                PHYSICS / ELECTROSTATICS
+            </p>
+
+            <h1>
+                Electric<br>
+                <span>Field.</span>
+            </h1>
+
+            <p>
+                Explore how an electric charge influences
+                the space around it.
+            </p>
+
+        </section>
+
+
+        <!-- SIMULATION -->
+
+        <section class="simulation-section">
+
+            <div class="simulation-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        INTERACTIVE SIMULATION
+                    </p>
+
+                    <h2>
+                        Explore the field.
+                    </h2>
+
+                </div>
+
+                <p>
+                    Drag the charge and change its
+                    magnitude to see how the field responds.
+                </p>
+
+            </div>
+
+
+            <div class="simulation-container">
+
+                <canvas id="fieldCanvas"></canvas>
+
+                <div class="simulation-controls">
+
+                    <label for="charge">
+                        Charge
+
+                        <strong>
+                            <span id="chargeValue">1</span> μC
+                        </strong>
+
+                    </label>
+
+                    <input
+                        type="range"
+                        id="charge"
+                        min="-5"
+                        max="5"
+                        step="1"
+                        value="1"
+                    >
+
+                    <p class="control-info">
+                        Positive values represent a positive
+                        charge. Negative values represent
+                        a negative charge.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- EXPLANATION -->
+
+        <section class="lesson-section">
+
+            <p class="eyebrow">
+                THE IDEA
+            </p>
+
+            <h2>
+                What is an electric field?
+            </h2>
+
+            <div class="lesson-content">
+
+                <p>
+                    An electric field is the region around
+                    a charged particle in which another
+                    electric charge would experience an
+                    electric force.
+                </p>
+
+                <p>
+                    The electric field at a point is defined
+                    as the electric force experienced per
+                    unit positive test charge placed at that
+                    point.
+                </p>
+
+            </div>
+
+
+            <div class="formula">
+
+                <span>
+                    E =
+                </span>
+
+                <span>
+                    F
+                    <small>q</small>
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- KEY POINTS -->
+
+        <section class="key-points">
+
+            <div class="key-point">
+
+                <span>01</span>
+
+                <h3>
+                    Direction
+                </h3>
+
+                <p>
+                    The electric field direction is the
+                    direction of the force on a positive
+                    test charge.
+                </p>
+
+            </div>
+
+
+            <div class="key-point">
+
+                <span>02</span>
+
+                <h3>
+                    Magnitude
+                </h3>
+
+                <p>
+                    For a point charge, the field becomes
+                    weaker as the distance from the charge
+                    increases.
+                </p>
+
+            </div>
+
+
+            <div class="key-point">
+
+                <span>03</span>
+
+                <h3>
+                    Superposition
+                </h3>
+
+                <p>
+                    Electric fields from multiple charges
+                    combine according to the principle of
+                    superposition.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-logo">
+            ISC<span>12</span>
+        </div>
+
+        <p>
+            Learn. Understand. Master.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
