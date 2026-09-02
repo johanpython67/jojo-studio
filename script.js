@@ -409,318 +409,236 @@ if (canvas) {
 
             }
 /* ELECTRIC FLUX SIMULATION */
+// ===============================
+// ELECTRIC FLUX SIMULATION
+// ===============================
 
 const fluxCanvas = document.getElementById("fluxCanvas");
 
 if (fluxCanvas) {
-
     const ctx = fluxCanvas.getContext("2d");
 
+    const fieldSlider = document.getElementById("fieldSlider");
+    const areaSlider = document.getElementById("areaSlider");
+    const angleSlider = document.getElementById("angleSlider");
 
-    const fieldSlider =
-        document.getElementById("fieldSlider");
-
-    const areaSlider =
-        document.getElementById("areaSlider");
-
-    const angleSlider =
-        document.getElementById("angleSlider");
-
-
-    const fieldValue =
-        document.getElementById("fieldValue");
-
-    const areaValue =
-        document.getElementById("areaValue");
-
-    const angleValue =
-        document.getElementById("angleValue");
-
-    const fluxValue =
-        document.getElementById("fluxValue");
-
-
-    let electricField = 5;
-
-    let area = 1;
-
-    let angle = 0;
-
+    const fieldValue = document.getElementById("fieldValue");
+    const areaValue = document.getElementById("areaValue");
+    const angleValue = document.getElementById("angleValue");
+    const fluxValue = document.getElementById("fluxValue");
 
     function resizeFluxCanvas() {
+        const rect = fluxCanvas.getBoundingClientRect();
 
-        const rect =
-            fluxCanvas.getBoundingClientRect();
+        fluxCanvas.width = rect.width * window.devicePixelRatio;
+        fluxCanvas.height = rect.height * window.devicePixelRatio;
 
-        fluxCanvas.width = rect.width;
-
-        fluxCanvas.height = rect.height;
+        ctx.setTransform(
+            window.devicePixelRatio,
+            0,
+            0,
+            window.devicePixelRatio,
+            0,
+            0
+        );
 
         drawFlux();
-
     }
 
-
     function drawArrow(x1, y1, x2, y2) {
+        const headLength = 8;
 
-        const angle =
-            Math.atan2(y2 - y1, x2 - x1);
-
-        const size = 8;
-
+        const angle = Math.atan2(y2 - y1, x2 - x1);
 
         ctx.beginPath();
-
         ctx.moveTo(x1, y1);
-
         ctx.lineTo(x2, y2);
-
-        ctx.strokeStyle = "#bdbdbd";
-
-        ctx.lineWidth = 2;
-
         ctx.stroke();
 
-
         ctx.beginPath();
-
         ctx.moveTo(x2, y2);
-
         ctx.lineTo(
-            x2 - size * Math.cos(angle - Math.PI / 6),
-            y2 - size * Math.sin(angle - Math.PI / 6)
+            x2 - headLength * Math.cos(angle - Math.PI / 6),
+            y2 - headLength * Math.sin(angle - Math.PI / 6)
         );
 
         ctx.lineTo(
-            x2 - size * Math.cos(angle + Math.PI / 6),
-            y2 - size * Math.sin(angle + Math.PI / 6)
+            x2 - headLength * Math.cos(angle + Math.PI / 6),
+            y2 - headLength * Math.sin(angle + Math.PI / 6)
         );
 
         ctx.closePath();
-
-        ctx.fillStyle = "#bdbdbd";
-
         ctx.fill();
-
     }
-
 
     function drawFlux() {
 
-        ctx.clearRect(
-            0,
-            0,
-            fluxCanvas.width,
-            fluxCanvas.height
-        );
+        const width = fluxCanvas.clientWidth;
+        const height = fluxCanvas.clientHeight;
 
+        ctx.clearRect(0, 0, width, height);
 
-        const centerX =
-            fluxCanvas.width / 2;
+        // -------------------------
+        // Background
+        // -------------------------
 
-        const centerY =
-            fluxCanvas.height / 2;
+        ctx.fillStyle = "#050505";
+        ctx.fillRect(0, 0, width, height);
 
+        // -------------------------
+        // Values
+        // -------------------------
 
-        /*
-         * DRAW ELECTRIC FIELD
-         */
+        const E = Number(fieldSlider.value);
+        const A = Number(areaSlider.value);
+        const theta = Number(angleSlider.value);
 
-        const spacing = 60;
+        const radians = theta * Math.PI / 180;
 
+        const flux = E * A * Math.cos(radians);
 
-        for (
-            let y = 70;
-            y < fluxCanvas.height - 50;
-            y += spacing
-        ) {
+        fieldValue.textContent = E + " N/C";
+        areaValue.textContent = A + " m²";
+        angleValue.textContent = theta + "°";
 
-            drawArrow(
-                40,
-                y,
-                centerX - 120,
-                y
-            );
+        fluxValue.textContent = flux.toFixed(2) + " N·m²/C";
 
-            drawArrow(
-                centerX + 120,
-                y,
-                fluxCanvas.width - 40,
-                y
-            );
-
-        }
-
-
-        /*
-         * SURFACE
-         */
-
-        const radians =
-            angle * Math.PI / 180;
-
-
-        const surfaceWidth =
-            150 + area * 12;
-
-
-        const surfaceHeight = 110;
-
-
-        const x1 =
-            centerX -
-            Math.cos(radians) * surfaceWidth / 2;
-
-
-        const y1 =
-            centerY -
-            Math.sin(radians) * surfaceWidth / 2;
-
-
-        const x2 =
-            centerX +
-            Math.cos(radians) * surfaceWidth / 2;
-
-
-        const y2 =
-            centerY +
-            Math.sin(radians) * surfaceWidth / 2;
-
-
-        ctx.beginPath();
-
-        ctx.moveTo(x1, y1);
-
-        ctx.lineTo(x2, y2);
+        // -------------------------
+        // Electric field arrows
+        // -------------------------
 
         ctx.strokeStyle = "#ffffff";
+        ctx.fillStyle = "#ffffff";
+        ctx.lineWidth = 1.5;
 
+        const spacing = 42;
+
+        for (let y = 35; y < height - 20; y += spacing) {
+
+            for (let x = 15; x < width - 20; x += spacing) {
+
+                drawArrow(
+                    x,
+                    y,
+                    x + 27,
+                    y
+                );
+            }
+        }
+
+        // -------------------------
+        // Surface
+        // -------------------------
+
+        const centerX = width / 2;
+        const centerY = height / 2;
+
+        const surfaceWidth = 130 + A * 35;
+
+        const surfaceHeight = 85;
+
+        const angle = radians;
+
+        const dx = Math.cos(angle) * surfaceWidth;
+        const dy = Math.sin(angle) * surfaceWidth;
+
+        const x1 = centerX - dx / 2;
+        const y1 = centerY - dy / 2;
+
+        const x2 = centerX + dx / 2;
+        const y2 = centerY + dy / 2;
+
+        // Surface line
+
+        ctx.strokeStyle = "#ffffff";
         ctx.lineWidth = 5;
 
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
         ctx.stroke();
 
-
-        /*
-         * NORMAL VECTOR
-         */
-
-        const normalAngle =
-            radians + Math.PI / 2;
-
+        // -------------------------
+        // Surface normal
+        // -------------------------
 
         const normalLength = 75;
 
+        const normalAngle = angle - Math.PI / 2;
+
+        const nx =
+            centerX +
+            Math.cos(normalAngle) * normalLength;
+
+        const ny =
+            centerY +
+            Math.sin(normalAngle) * normalLength;
+
+        ctx.strokeStyle = "#d6d6d6";
+        ctx.fillStyle = "#d6d6d6";
+        ctx.lineWidth = 3;
 
         drawArrow(
             centerX,
             centerY,
-            centerX +
-            Math.cos(normalAngle) * normalLength,
-
-            centerY +
-            Math.sin(normalAngle) * normalLength
+            nx,
+            ny
         );
 
+        // -------------------------
+        // Labels
+        // -------------------------
 
-        /*
-         * SURFACE LABEL
-         */
-
-        ctx.fillStyle = "#d6d6d6";
-
-        ctx.font = "14px Arial";
-
-        ctx.textAlign = "center";
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "15px Arial";
 
         ctx.fillText(
             "Surface",
-            centerX,
-            centerY + 100
+            centerX - 28,
+            centerY + 35
         );
 
+        ctx.fillStyle = "#d6d6d6";
 
-        /*
-         * FLUX CALCULATION
-         */
+        ctx.fillText(
+            "Normal",
+            nx + 8,
+            ny
+        );
 
-        const flux =
-            electricField *
-            area *
-            Math.cos(radians);
+        // -------------------------
+        // Angle arc
+        // -------------------------
 
+        ctx.strokeStyle = "#c8c8c8";
+        ctx.lineWidth = 2;
 
-        fluxValue.textContent =
-            flux.toFixed(2) + " N·m²/C";
+        ctx.beginPath();
 
+        ctx.arc(
+            centerX,
+            centerY,
+            42,
+            normalAngle,
+            0
+        );
+
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffffff";
+
+        ctx.fillText(
+            "θ = " + theta + "°",
+            centerX + 45,
+            centerY - 10
+        );
     }
 
+    fieldSlider.addEventListener("input", drawFlux);
+    areaSlider.addEventListener("input", drawFlux);
+    angleSlider.addEventListener("input", drawFlux);
 
-    /*
-     * FIELD SLIDER
-     */
-
-    fieldSlider.addEventListener(
-        "input",
-        function () {
-
-            electricField =
-                Number(this.value);
-
-            fieldValue.textContent =
-                electricField;
-
-            drawFlux();
-
-        }
-    );
-
-
-    /*
-     * AREA SLIDER
-     */
-
-    areaSlider.addEventListener(
-        "input",
-        function () {
-
-            area =
-                Number(this.value);
-
-            areaValue.textContent =
-                area;
-
-            drawFlux();
-
-        }
-    );
-
-
-    /*
-     * ANGLE SLIDER
-     */
-
-    angleSlider.addEventListener(
-        "input",
-        function () {
-
-            angle =
-                Number(this.value);
-
-            angleValue.textContent =
-                angle;
-
-            drawFlux();
-
-        }
-    );
-
-
-    window.addEventListener(
-        "resize",
-        resizeFluxCanvas
-    );
-
+    window.addEventListener("resize", resizeFluxCanvas);
 
     resizeFluxCanvas();
-
-}
+            }
