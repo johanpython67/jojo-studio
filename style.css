@@ -987,3 +987,41 @@ footer .copyright {
     }
 
 }
+/* LIGHT TEXT SYSTEM */
+
+.lesson-content p {
+    color: #d6d6d6;
+}
+
+.key-point p {
+    color: #c8c8c8;
+}
+
+.subject-hero > p:last-child,
+.concept-intro > p:last-child,
+.simulation-header > p,
+.login-section p,
+.about > p:last-child {
+    color: #c8c8c8;
+}
+
+.chapter-card p {
+    color: #c0c0c0;
+}
+
+.concept-item > span:first-child,
+.concept-item > span:last-child,
+.subject-number,
+.arrow,
+.feature span,
+.eyebrow {
+    color: #b0b0b0;
+}
+
+.control-info {
+    color: #aaa;
+}
+
+.next-prev a {
+    color: #c8c8c8;
+}
