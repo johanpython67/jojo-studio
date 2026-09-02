@@ -51,7 +51,118 @@
         </p>
 
     </section>
+<!-- ELECTRIC FLUX SIMULATION -->
 
+<section class="flux-simulation">
+
+    <div class="flux-header">
+
+        <div>
+            <p class="eyebrow">
+                INTERACTIVE SIMULATION
+            </p>
+
+            <h2>
+                See flux change.
+            </h2>
+        </div>
+
+        <p>
+            Change the electric field, surface area and
+            angle to explore how electric flux behaves.
+        </p>
+
+    </div>
+
+
+    <div class="flux-container">
+
+        <canvas id="fluxCanvas"></canvas>
+
+
+        <div class="flux-controls">
+
+            <div class="flux-control">
+
+                <label>
+                    Electric Field
+                    <strong>
+                        <span id="fieldValue">5</span> N/C
+                    </strong>
+                </label>
+
+                <input
+                    type="range"
+                    id="fieldSlider"
+                    min="1"
+                    max="10"
+                    value="5"
+                >
+
+            </div>
+
+
+            <div class="flux-control">
+
+                <label>
+                    Surface Area
+                    <strong>
+                        <span id="areaValue">1</span> m²
+                    </strong>
+                </label>
+
+                <input
+                    type="range"
+                    id="areaSlider"
+                    min="1"
+                    max="10"
+                    value="1"
+                >
+
+            </div>
+
+
+            <div class="flux-control">
+
+                <label>
+                    Angle
+                    <strong>
+                        <span id="angleValue">0</span>°
+                    </strong>
+                </label>
+
+                <input
+                    type="range"
+                    id="angleSlider"
+                    min="0"
+                    max="180"
+                    value="0"
+                >
+
+            </div>
+
+
+            <div class="flux-result">
+
+                <span>
+                    ELECTRIC FLUX
+                </span>
+
+                <strong id="fluxValue">
+                    5.00 N·m²/C
+                </strong>
+
+                <p>
+                    Φ = EA cos θ
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
     <section class="lesson-section">
 
