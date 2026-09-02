@@ -408,36 +408,58 @@ if (canvas) {
     resizeCanvas();
 
             }
-/* ELECTRIC FLUX SIMULATION */
-// ===============================
-// ELECTRIC FLUX SIMULATION
-// ===============================
+
+        /* ===============================
+   ELECTRIC FLUX SIMULATION
+   =============================== */
 
 const fluxCanvas = document.getElementById("fluxCanvas");
 
 if (fluxCanvas) {
+
     const ctx = fluxCanvas.getContext("2d");
 
-    const fieldSlider = document.getElementById("fieldSlider");
-    const areaSlider = document.getElementById("areaSlider");
-    const angleSlider = document.getElementById("angleSlider");
+    const fieldSlider =
+        document.getElementById("fieldSlider");
 
-    const fieldValue = document.getElementById("fieldValue");
-    const areaValue = document.getElementById("areaValue");
-    const angleValue = document.getElementById("angleValue");
-    const fluxValue = document.getElementById("fluxValue");
+    const areaSlider =
+        document.getElementById("areaSlider");
+
+    const angleSlider =
+        document.getElementById("angleSlider");
+
+    const fieldValue =
+        document.getElementById("fieldValue");
+
+    const areaValue =
+        document.getElementById("areaValue");
+
+    const angleValue =
+        document.getElementById("angleValue");
+
+    const fluxValue =
+        document.getElementById("fluxValue");
+
 
     function resizeFluxCanvas() {
-        const rect = fluxCanvas.getBoundingClientRect();
 
-        fluxCanvas.width = rect.width * window.devicePixelRatio;
-        fluxCanvas.height = rect.height * window.devicePixelRatio;
+        const rect =
+            fluxCanvas.getBoundingClientRect();
+
+        const dpr =
+            window.devicePixelRatio || 1;
+
+        fluxCanvas.width =
+            rect.width * dpr;
+
+        fluxCanvas.height =
+            rect.height * dpr;
 
         ctx.setTransform(
-            window.devicePixelRatio,
+            dpr,
             0,
             0,
-            window.devicePixelRatio,
+            dpr,
             0,
             0
         );
@@ -445,138 +467,285 @@ if (fluxCanvas) {
         drawFlux();
     }
 
-    function drawArrow(x1, y1, x2, y2) {
-        const headLength = 8;
 
-        const angle = Math.atan2(y2 - y1, x2 - x1);
+    function drawArrow(
+        x1,
+        y1,
+        x2,
+        y2
+    ) {
+
+        const head = 7;
+
+        const angle =
+            Math.atan2(
+                y2 - y1,
+                x2 - x1
+            );
+
 
         ctx.beginPath();
+
         ctx.moveTo(x1, y1);
         ctx.lineTo(x2, y2);
+
         ctx.stroke();
 
+
         ctx.beginPath();
+
         ctx.moveTo(x2, y2);
-        ctx.lineTo(
-            x2 - headLength * Math.cos(angle - Math.PI / 6),
-            y2 - headLength * Math.sin(angle - Math.PI / 6)
-        );
 
         ctx.lineTo(
-            x2 - headLength * Math.cos(angle + Math.PI / 6),
-            y2 - headLength * Math.sin(angle + Math.PI / 6)
+            x2 -
+            head *
+            Math.cos(angle - Math.PI / 6),
+
+            y2 -
+            head *
+            Math.sin(angle - Math.PI / 6)
         );
+
+
+        ctx.lineTo(
+            x2 -
+            head *
+            Math.cos(angle + Math.PI / 6),
+
+            y2 -
+            head *
+            Math.sin(angle + Math.PI / 6)
+        );
+
 
         ctx.closePath();
+
         ctx.fill();
     }
 
+
     function drawFlux() {
 
-        const width = fluxCanvas.clientWidth;
-        const height = fluxCanvas.clientHeight;
+        const width =
+            fluxCanvas.clientWidth;
 
-        ctx.clearRect(0, 0, width, height);
+        const height =
+            fluxCanvas.clientHeight;
 
-        // -------------------------
-        // Background
-        // -------------------------
+
+        /* -------------------------
+           GET VALUES
+        ------------------------- */
+
+        const E =
+            Number(fieldSlider.value);
+
+        const A =
+            Number(areaSlider.value);
+
+        const theta =
+            Number(angleSlider.value);
+
+
+        const radians =
+            theta * Math.PI / 180;
+
+
+        const flux =
+            E *
+            A *
+            Math.cos(radians);
+
+
+        /* -------------------------
+           UPDATE VALUES
+        ------------------------- */
+
+        fieldValue.textContent =
+            E;
+
+        areaValue.textContent =
+            A;
+
+        angleValue.textContent =
+            theta;
+
+
+        fluxValue.textContent =
+            flux.toFixed(2) +
+            " N·m²/C";
+
+
+        /* -------------------------
+           CLEAR
+        ------------------------- */
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        /* -------------------------
+           BACKGROUND
+        ------------------------- */
 
         ctx.fillStyle = "#050505";
-        ctx.fillRect(0, 0, width, height);
 
-        // -------------------------
-        // Values
-        // -------------------------
+        ctx.fillRect(
+            0,
+            0,
+            width,
+            height
+        );
 
-        const E = Number(fieldSlider.value);
-        const A = Number(areaSlider.value);
-        const theta = Number(angleSlider.value);
 
-        const radians = theta * Math.PI / 180;
+        /* -------------------------
+           ELECTRIC FIELD
+        ------------------------- */
 
-        const flux = E * A * Math.cos(radians);
+        ctx.strokeStyle =
+            "#ffffff";
 
-        fieldValue.textContent = E + " N/C";
-        areaValue.textContent = A + " m²";
-        angleValue.textContent = theta + "°";
+        ctx.fillStyle =
+            "#ffffff";
 
-        fluxValue.textContent = flux.toFixed(2) + " N·m²/C";
-
-        // -------------------------
-        // Electric field arrows
-        // -------------------------
-
-        ctx.strokeStyle = "#ffffff";
-        ctx.fillStyle = "#ffffff";
         ctx.lineWidth = 1.5;
 
-        const spacing = 42;
 
-        for (let y = 35; y < height - 20; y += spacing) {
+        const spacing = 40;
 
-            for (let x = 15; x < width - 20; x += spacing) {
+
+        for (
+            let y = 25;
+            y < height;
+            y += spacing
+        ) {
+
+            for (
+                let x = 15;
+                x < width;
+                x += spacing
+            ) {
 
                 drawArrow(
                     x,
                     y,
-                    x + 27,
+                    x + 25,
                     y
                 );
+
             }
+
         }
 
-        // -------------------------
-        // Surface
-        // -------------------------
 
-        const centerX = width / 2;
-        const centerY = height / 2;
+        /* -------------------------
+           SURFACE
+        ------------------------- */
 
-        const surfaceWidth = 130 + A * 35;
+        const centerX =
+            width / 2;
 
-        const surfaceHeight = 85;
+        const centerY =
+            height / 2;
 
-        const angle = radians;
 
-        const dx = Math.cos(angle) * surfaceWidth;
-        const dy = Math.sin(angle) * surfaceWidth;
+        /*
+         * Area controls the size
+         * of the surface.
+         */
 
-        const x1 = centerX - dx / 2;
-        const y1 = centerY - dy / 2;
+        const surfaceWidth =
+            100 + A * 25;
 
-        const x2 = centerX + dx / 2;
-        const y2 = centerY + dy / 2;
 
-        // Surface line
+        const angle =
+            radians;
 
-        ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = 5;
+
+        const dx =
+            Math.cos(angle) *
+            surfaceWidth;
+
+
+        const dy =
+            Math.sin(angle) *
+            surfaceWidth;
+
+
+        const x1 =
+            centerX - dx / 2;
+
+
+        const y1 =
+            centerY - dy / 2;
+
+
+        const x2 =
+            centerX + dx / 2;
+
+
+        const y2 =
+            centerY + dy / 2;
+
+
+        /* Surface */
+
+        ctx.strokeStyle =
+            "#ffffff";
+
+        ctx.lineWidth = 6;
+
 
         ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
+
+        ctx.moveTo(
+            x1,
+            y1
+        );
+
+        ctx.lineTo(
+            x2,
+            y2
+        );
+
         ctx.stroke();
 
-        // -------------------------
-        // Surface normal
-        // -------------------------
 
-        const normalLength = 75;
+        /* -------------------------
+           NORMAL VECTOR
+        ------------------------- */
 
-        const normalAngle = angle - Math.PI / 2;
+        const normalLength = 80;
+
+
+        const normalAngle =
+            angle - Math.PI / 2;
+
 
         const nx =
             centerX +
-            Math.cos(normalAngle) * normalLength;
+            Math.cos(normalAngle) *
+            normalLength;
+
 
         const ny =
             centerY +
-            Math.sin(normalAngle) * normalLength;
+            Math.sin(normalAngle) *
+            normalLength;
 
-        ctx.strokeStyle = "#d6d6d6";
-        ctx.fillStyle = "#d6d6d6";
+
+        ctx.strokeStyle =
+            "#d6d6d6";
+
+        ctx.fillStyle =
+            "#d6d6d6";
+
         ctx.lineWidth = 3;
+
 
         drawArrow(
             centerX,
@@ -585,20 +754,34 @@ if (fluxCanvas) {
             ny
         );
 
-        // -------------------------
-        // Labels
-        // -------------------------
 
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "15px Arial";
+        /* -------------------------
+           LABELS
+        ------------------------- */
+
+        ctx.font =
+            "15px Arial";
+
+        ctx.fillStyle =
+            "#ffffff";
+
+        ctx.textAlign =
+            "center";
+
 
         ctx.fillText(
             "Surface",
-            centerX - 28,
-            centerY + 35
+            centerX,
+            centerY + 30
         );
 
-        ctx.fillStyle = "#d6d6d6";
+
+        ctx.textAlign =
+            "left";
+
+        ctx.fillStyle =
+            "#d6d6d6";
+
 
         ctx.fillText(
             "Normal",
@@ -606,39 +789,79 @@ if (fluxCanvas) {
             ny
         );
 
-        // -------------------------
-        // Angle arc
-        // -------------------------
 
-        ctx.strokeStyle = "#c8c8c8";
+        /* -------------------------
+           ANGLE
+        ------------------------- */
+
+        ctx.strokeStyle =
+            "#c8c8c8";
+
         ctx.lineWidth = 2;
+
 
         ctx.beginPath();
 
         ctx.arc(
             centerX,
             centerY,
-            42,
+            45,
             normalAngle,
             0
         );
 
         ctx.stroke();
 
-        ctx.fillStyle = "#ffffff";
+
+        ctx.fillStyle =
+            "#ffffff";
+
 
         ctx.fillText(
             "θ = " + theta + "°",
-            centerX + 45,
+            centerX + 50,
             centerY - 10
         );
+
     }
 
-    fieldSlider.addEventListener("input", drawFlux);
-    areaSlider.addEventListener("input", drawFlux);
-    angleSlider.addEventListener("input", drawFlux);
 
-    window.addEventListener("resize", resizeFluxCanvas);
+    /* -------------------------
+       SLIDERS
+    ------------------------- */
+
+    fieldSlider.addEventListener(
+        "input",
+        drawFlux
+    );
+
+
+    areaSlider.addEventListener(
+        "input",
+        drawFlux
+    );
+
+
+    angleSlider.addEventListener(
+        "input",
+        drawFlux
+    );
+
+
+    /* -------------------------
+       RESIZE
+    ------------------------- */
+
+    window.addEventListener(
+        "resize",
+        resizeFluxCanvas
+    );
+
+
+    /* -------------------------
+       START
+    ------------------------- */
 
     resizeFluxCanvas();
-            }
+
+}
