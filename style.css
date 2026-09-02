@@ -1025,3 +1025,168 @@ footer .copyright {
 .next-prev a {
     color: #c8c8c8;
 }
+/* ELECTRIC FLUX SIMULATION */
+
+.flux-simulation {
+    background: #111112;
+    padding: 100px 7%;
+}
+
+.flux-header {
+    max-width: 1100px;
+    margin: 0 auto 50px;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.flux-header h2 {
+    font-size: clamp(40px, 6vw, 65px);
+
+    line-height: 1;
+    letter-spacing: -3px;
+
+    margin-top: 15px;
+}
+
+.flux-header > p {
+    max-width: 400px;
+
+    color: #c8c8c8;
+
+    line-height: 1.7;
+}
+
+
+.flux-container {
+    max-width: 1100px;
+
+    margin: auto;
+
+    background: #090909;
+
+    border: 1px solid #292929;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+}
+
+
+#fluxCanvas {
+    display: block;
+
+    width: 100%;
+
+    height: 480px;
+}
+
+
+.flux-controls {
+    padding: 30px;
+
+    border-top: 1px solid #292929;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+.flux-control label {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+
+    color: #d6d6d6;
+
+    font-size: 14px;
+}
+
+
+.flux-control strong {
+    color: white;
+}
+
+
+.flux-control input {
+    width: 100%;
+}
+
+
+.flux-result {
+    grid-column: 1 / -1;
+
+    margin-top: 10px;
+
+    padding: 25px;
+
+    border-top: 1px solid #292929;
+
+    text-align: center;
+}
+
+
+.flux-result span {
+    display: block;
+
+    color: #b0b0b0;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+
+.flux-result strong {
+    display: block;
+
+    font-size: 36px;
+
+    color: white;
+}
+
+
+.flux-result p {
+    margin-top: 8px;
+
+    color: #c8c8c8;
+}
+
+
+@media (max-width: 700px) {
+
+    .flux-simulation {
+        padding: 70px 5%;
+    }
+
+    .flux-header {
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+    #fluxCanvas {
+        height: 380px;
+    }
+
+    .flux-controls {
+        grid-template-columns: 1fr;
+
+        padding: 22px;
+    }
+
+    .flux-result {
+        grid-column: auto;
+    }
+
+}
